@@ -1,4 +1,6 @@
 /backend/web/uploads/
+/backend/web/attachments/
+
 # yii console command
 /yii
 

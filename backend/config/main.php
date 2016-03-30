@@ -29,7 +29,11 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],    
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => fasle
+        ],
         'authManager' =>   
             [
                 'class' => 'yii\rbac\DbManager',
