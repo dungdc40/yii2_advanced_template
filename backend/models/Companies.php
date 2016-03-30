@@ -19,6 +19,9 @@ use Yii;
  */
 class Companies extends \yii\db\ActiveRecord
 {
+    
+    public $file;
+    
     /**
      * @inheritdoc
      */
@@ -35,8 +38,9 @@ class Companies extends \yii\db\ActiveRecord
         return [
             [['company_name', 'company_email', 'company_address', 'company_created_date', 'company_status'], 'required'],
             [['company_created_date'], 'safe'],
+            [['file'], 'file'],
             [['company_status'], 'string'],
-            [['company_name', 'company_email'], 'string', 'max' => 100],
+            [['company_name', 'logo', 'company_email'], 'string', 'max' => 100],
             [['company_address'], 'string', 'max' => 250]
         ];
     }
@@ -47,12 +51,13 @@ class Companies extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'company_id' => 'Company ID',
-            'company_name' => 'Company Name',
-            'company_email' => 'Company Email',
-            'company_address' => 'Company Address',
+            'company_id'           => 'Company ID',
+            'company_name'         => 'Company Name',
+            'company_email'        => 'Company Email',
+            'company_address'      => 'Company Address',
             'company_created_date' => 'Company Created Date',
-            'company_status' => 'Company Status',
+            'company_status'       => 'Company Status',
+            'file'                 => 'Logo'
         ];
     }
 
