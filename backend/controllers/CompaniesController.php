@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\web\ForbiddenHttpException;
+
 /**
  * CompaniesController implements the CRUD actions for Companies model.
  */
@@ -60,25 +62,29 @@ class CompaniesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Companies();
+        if(Yii::$app->user->can('create-company')) {
+            $model = new Companies();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            // get the instance of the upladed file
-            $imageName = $model->company_name;
-            $model->file = UploadedFile::getInstance($model, 'file');
-            $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
-            
-            // save file path to db
-            $model->logo = 'uploads/'.$imageName.'.'.$model->file->extension;
-            
-            $model->company_created_date = date('Y-m-d h:m:s');
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->company_id]);
+            if ($model->load(Yii::$app->request->post())) {
+
+                // get the instance of the upladed file
+                $imageName = $model->company_name;
+                $model->file = UploadedFile::getInstance($model, 'file');
+                $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
+
+                // save file path to db
+                $model->logo = 'uploads/'.$imageName.'.'.$model->file->extension;
+
+                $model->company_created_date = date('Y-m-d h:m:s');
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->company_id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            throw new ForbiddenHttpException;
         }
     }
 
