@@ -32,7 +32,7 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => fasle
+            'useFileTransport' => false
         ],
         'authManager' =>   
             [
