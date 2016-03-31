@@ -12,7 +12,7 @@ use kartik\select2\Select2;
 
 <div class="branches-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => $model->formName()]); ?>
 
     <?=
         $form->field($model, 'companies_company_id')->widget(Select2::classname(), [
@@ -39,3 +39,27 @@ use kartik\select2\Select2;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+$script = <<< JS
+$('form#{$model->formName()}').on('beforeSubmit', function(e){
+    var \$form = $(this);
+    $.post(
+        \$form.attr("action"),
+        \$form.serialize()
+    ).done(function(result){
+        if(result == 1) {
+            $(\$form).trigger("reset");
+            $.pjax.reload({container:'#branchesGrid'});
+        } else {
+            $("#message").html(result.message);
+        }
+    }).fail(function(){
+        console.log("server error");
+    });
+    
+    return false;
+})
+JS;
+
+$this->registerJs($script);
+?>
