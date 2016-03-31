@@ -55,12 +55,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        echo Yii::$app->MyComponent->currencyConverter('USD', 'VND', 100);
-//        return $this->render('index');
+//        echo Yii::$app->MyComponent->currencyConverter('USD', 'VND', 100);
+        return $this->render('index');
     }
 
     public function actionLogin()
     {
+        $this->layout = 'loginLayout';
+        
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
