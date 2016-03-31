@@ -22,6 +22,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'company_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => 'Status']) ?>
 
+    <!-- Branch model --> 
+    <?= $form->field($branch, 'branch_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($branch, 'branch_address')->textInput(['maxlength' => true]) ?>
+
+
+    <?= $form->field($branch, 'branch_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => 'Status']) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
