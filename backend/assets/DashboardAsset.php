@@ -27,7 +27,7 @@ class DashboardAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/bootstrap/bootstrap.min.js',
+        
         '//code.jquery.com/ui/1.11.4/jquery-ui.min.js',
         '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
         'plugins/sparkline/jquery.sparkline.min.js',
