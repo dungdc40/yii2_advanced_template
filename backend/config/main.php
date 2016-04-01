@@ -63,5 +63,8 @@ return [
         ],
         */
     ],
+    'as beforeRequest' => [
+        'class' => 'backend\components\CheckIfLoggedIn'
+    ],
     'params' => $params,
 ];
