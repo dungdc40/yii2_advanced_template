@@ -38,6 +38,7 @@ class Branches extends \yii\db\ActiveRecord
             [['branch_created_date'], 'safe'],
             [['branch_status'], 'string'],
             [['branch_name'], 'string', 'max' => 100],
+            ['branch_name', 'unique'],
             [['branch_address'], 'string', 'max' => 255]
         ];
     }

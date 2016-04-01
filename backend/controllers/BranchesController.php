@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\helpers\Json;
+use yii\widgets\ActiveForm;
 
 /**
  * BranchesController implements the CRUD actions for Branches model.
@@ -82,7 +83,9 @@ class BranchesController extends Controller
     {
         if(Yii::$app->user->can('create-branch')) {
             $model = new Branches();
-
+                
+            
+            
             if ($model->load(Yii::$app->request->post())) {
                 $model->branch_created_date = date('Y:m:d h:m:s');
                 if($model->save()) {
@@ -95,6 +98,20 @@ class BranchesController extends Controller
                     'model' => $model,
                 ]);
             }
+        } else {
+            throw new ForbiddenHttpException;
+        }
+    }
+    
+    public function actionValidate()
+    {     
+        if(Yii::$app->user->can('create-branch')) {
+            $model = new Branches();
+            if(Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = 'json';
+                return ActiveForm::validate($model);
+            }
+                 
         } else {
             throw new ForbiddenHttpException;
         }
