@@ -65,7 +65,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'kartik\grid\EditableColumn',
-                'header' => 'BRANCH',
                 'attribute' => 'branch_name'
             ],
             'branch_address',
