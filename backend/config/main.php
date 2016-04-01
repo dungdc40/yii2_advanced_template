@@ -25,6 +25,18 @@ return [
         ]
     ],
     'components' => [
+        'i18n' => [
+          'translations' => [
+              'app' => [
+                  'class' => 'yii\i18n\PhpMessageSource',
+                  'sourceLanguage' => 'en',
+                  'fileMap' => [
+                      'app' => 'app.php',
+                      'app/error' => 'error.php'
+                  ]
+              ]
+          ]
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
