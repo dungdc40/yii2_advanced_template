@@ -38,7 +38,7 @@ class Companies extends \yii\db\ActiveRecord
         return [
             [['company_name', 'company_email', 'company_address', 'company_created_date', 'company_status'], 'required'],
             [['company_created_date'], 'safe'],
-            [['file'], 'file'],
+            [['file'], 'image', 'minHeight' => '1024', 'minWidth' => '1024'],
             [['company_status'], 'string'],
             [['company_name', 'logo', 'company_email'], 'string', 'max' => 100],
             [['company_address'], 'string', 'max' => 250]
