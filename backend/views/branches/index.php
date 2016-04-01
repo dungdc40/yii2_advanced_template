@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     
     <?php
+        $this->params['test'] = 'test string';
+        $this->beginBlock('advertisement');
+            echo '<h3>This is an Advertisement</h3>';
+        $this->endBlock();
         Modal::begin([
             'header' => '<h4>Branches</h4>',
             'id' => 'modal',
