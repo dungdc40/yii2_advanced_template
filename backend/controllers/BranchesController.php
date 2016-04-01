@@ -162,4 +162,37 @@ class BranchesController extends Controller
             echo '<option></option>';
         }
     }
+    
+    public function actionImportExcel()
+    {
+        $inputFile = 'uploads/branches_file.xlsx';
+        try {
+            $inputFileType = \PHPExcel_IOFactory::identify($inputFile);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPhpExcel = $objReader->load($inputFile);
+        } catch (Exception $ex) {
+            die("error");
+        }
+        
+        $sheet = $objPhpExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+        
+        for($row =1; $row <= $highestRow; $row++) {
+            $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row, NULL, TRUE, FALSE);
+            if($row == 1) {
+                continue;
+            }
+            
+            $branch = new Branches();
+            $branch_id = $rowData[0][0];
+            $branch->companies_company_id = $rowData[0][1];
+            $branch->branch_name = $rowData[0][2];
+            $branch->branch_address = $rowData[0][3];
+            $branch->branch_created_date = date('Y-m-d H:m:s');
+            $branch->branch_status = $rowData[0][4];
+            $branch->save();
+        }
+        die('okay');
+    }
 }
