@@ -28,12 +28,12 @@ return [
         'i18n' => [
           'translations' => [
               'app' => [
-                  'class' => 'yii\i18n\PhpMessageSource',
+                  'class' => 'yii\i18n\DbMessageSource',
                   'sourceLanguage' => 'en',
-                  'fileMap' => [
-                      'app' => 'app.php',
-                      'app/error' => 'error.php'
-                  ]
+//                  'fileMap' => [
+//                      'app' => 'app.php',
+//                      'app/error' => 'error.php'
+//                  ]
               ]
           ]
         ],
